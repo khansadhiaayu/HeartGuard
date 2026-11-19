@@ -1,0 +1,161 @@
+
+{% extends 'prediction/base.html' %}
+
+{% block title %}HeartGuard - Heart Disease Prediction{% endblock %}
+
+{% block extra_css %}
+<style>
+    .hero {
+        padding: 85px 8%;
+        background: linear-gradient(120deg, #fff0f2, #f2f6ff);
+        border-radius: 12px;
+    }
+
+    .hero h1 {
+        font-size: 43px;
+        max-width: 650px;
+        line-height: 1.25;
+        margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+        color: #e34d65;
+    }
+
+    .hero p {
+        max-width: 570px;
+        line-height: 1.8;
+        color: #657188;
+        margin-bottom: 30px;
+    }
+
+    .button {
+        display: inline-block;
+        background: #e34d65;
+        color: white;
+        padding: 14px 25px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .button:hover {
+        background: #d83d57;
+    }
+
+    .features {
+        padding: 55px 0;
+    }
+
+    .features h2 {
+        margin-bottom: 25px;
+    }
+
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+    }
+
+    .card {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 3px 15px #00000008;
+    }
+
+    .card h3 {
+        margin-bottom: 12px;
+        color: #e34d65;
+    }
+
+    .card p {
+        color: #657188;
+        line-height: 1.7;
+        font-size: 14px;
+    }
+
+    .home-footer {
+        text-align: center;
+        padding: 25px;
+        color: #8490a3;
+        font-size: 13px;
+    }
+
+    @media(max-width: 700px) {
+        .hero {
+            padding: 55px 25px;
+        }
+
+        .hero h1 {
+            font-size: 32px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <h1>
+        Kenali Risiko Penyakit Jantung
+        dengan <span>HeartGuard</span>
+    </h1>
+
+    <p>
+        HeartGuard merupakan aplikasi prediksi penyakit jantung
+        berbasis Machine Learning yang menggunakan algoritma
+        Decision Tree untuk membantu memperkirakan risiko
+        berdasarkan data kesehatan pengguna.
+    </p>
+
+    <a href="/prediksi/" class="button">Mulai Prediksi</a>
+</section>
+
+<section class="features" id="fitur">
+    <h2>Fitur HeartGuard</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Prediksi Penyakit Jantung</h3>
+            <p>
+                Memperkirakan hasil klasifikasi berdasarkan
+                data kesehatan yang dimasukkan pengguna.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Visualisasi Data</h3>
+            <p>
+                Menampilkan informasi dan grafik dari
+                dataset penyakit jantung.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Evaluasi Model</h3>
+            <p>
+                Menampilkan hasil akurasi dan evaluasi
+                model Machine Learning.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Riwayat Prediksi</h3>
+            <p>
+                Menyimpan hasil prediksi sebelumnya
+                menggunakan database SQLite.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<footer class="home-footer">
+    © 2026 HeartGuard - Heart Disease Prediction System
+    <br>
+    Hasil prediksi bukan pengganti diagnosis tenaga medis.
+</footer>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+
+/* Tampilan ikon chatbot mengambang */
+.st-key-chat_launcher {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    z-index: 999999;
+    width: 65px;
+}
+
+.st-key-chat_launcher button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #167D70;
+    color: white;
+    border: none;
+    font-size: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Tampilan kotak percakapan */
+.st-key-chat_panel {
+    position: fixed;
+    right: 25px;
+    bottom: 100px;
+    width: 350px;
+    max-width: calc(100vw - 40px);
+    height: 480px;
+    max-height: calc(100vh - 130px);
+    overflow-y: auto;
+    z-index: 999998;
+    background-color: white;
+    border: 1px solid #dddddd;
+    border-radius: 16px;
+    padding: 15px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.18);
+}
+
+/* Judul chatbot */
+.chat-header {
+    background-color: #167D70;
+    color: white;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}

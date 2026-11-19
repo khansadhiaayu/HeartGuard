@@ -1,0 +1,180 @@
+
+{% extends "prediction/base.html" %}
+
+{% block title %}Dashboard - HeartGuard{% endblock %}
+
+{% block extra_head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .description {
+        color: #657188;
+        margin-bottom: 30px;
+    }
+
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 20px;
+    }
+
+    .card {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 3px 15px #00000008;
+    }
+
+    .card p {
+        color: #657188;
+        font-size: 14px;
+    }
+
+    .card h2 {
+        color: #e34d65;
+        font-size: 30px;
+        margin-bottom: 0;
+    }
+
+    .charts {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+    }
+
+    .chart-card {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        min-width: 0;
+    }
+
+    .chart-card h3 {
+        margin-top: 0;
+    }
+
+    .chart-wrapper {
+        position: relative;
+        height: 300px;
+    }
+
+    @media(max-width: 700px) {
+        .charts {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<h1>Dashboard HeartGuard</h1>
+
+<p class="description">
+    Ringkasan dan visualisasi dataset penyakit jantung.
+</p>
+
+<section class="cards">
+
+    <div class="card">
+        <p>Total Data Dataset</p>
+        <h2>{{ total_data }}</h2>
+    </div>
+
+    <div class="card">
+        <p>Tanpa Penyakit Jantung</p>
+        <h2>{{ tanpa_penyakit }}</h2>
+    </div>
+
+    <div class="card">
+        <p>Dengan Penyakit Jantung</p>
+        <h2>{{ dengan_penyakit }}</h2>
+    </div>
+
+    <div class="card">
+        <p>Rata-rata Usia</p>
+        <h2>{{ rata_rata_usia }}</h2>
+        <p>Tahun</p>
+    </div>
+
+</section>
+
+<section class="charts">
+
+    <div class="chart-card">
+        <h3>Distribusi Penyakit Jantung</h3>
+        <div class="chart-wrapper">
+            <canvas id="heartChart"></canvas>
+        </div>
+    </div>
+
+    <div class="chart-card">
+        <h3>Distribusi Jenis Kelamin</h3>
+        <div class="chart-wrapper">
+            <canvas id="sexChart"></canvas>
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Grafik distribusi penyakit jantung
+    new Chart(document.getElementById('heartChart'), {
+        type: 'bar',
+        data: {
+            labels: [
+                'Tanpa Penyakit Jantung',
+                'Dengan Penyakit Jantung'
+            ],
+            datasets: [{
+                label: 'Jumlah Data',
+                data: [
+                    {{ tanpa_penyakit }},
+                    {{ dengan_penyakit }}
+                ],
+                backgroundColor: ['#62b99a', '#e34d65'],
+                borderRadius: 8
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Grafik distribusi jenis kelamin
+    new Chart(document.getElementById('sexChart'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Laki-laki', 'Perempuan'],
+            datasets: [{
+                data: [
+                    {{ jumlah_laki }},
+                    {{ jumlah_perempuan }}
+                ],
+                backgroundColor: ['#6389d9', '#e982a0']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+</script>
+{% endblock %}

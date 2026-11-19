@@ -1,0 +1,125 @@
+
+{% extends 'prediction/base.html' %}
+
+{% block title %}Riwayat Prediksi - HeartGuard{% endblock %}
+
+{% block extra_css %}
+<style>
+    h1 {
+        color: #e34d65;
+    }
+
+    .table-container {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        overflow-x: auto;
+    }
+
+    .table-container table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 850px;
+    }
+
+    .table-container th,
+    .table-container td {
+        padding: 14px;
+        text-align: left;
+        border-bottom: 1px solid #edf0f5;
+        font-size: 14px;
+    }
+
+    .table-container th {
+        background: #fff0f2;
+        color: #d9445e;
+    }
+
+    .positive {
+        color: #d9445e;
+        font-weight: bold;
+    }
+
+    .negative {
+        color: #21865b;
+        font-weight: bold;
+    }
+
+    .empty {
+        text-align: center;
+        padding: 35px;
+        color: #657188;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<h1>Riwayat Prediksi</h1>
+
+<p>Daftar hasil prediksi yang pernah dilakukan.</p>
+
+<div class="table-container">
+
+    {% if histories %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Tanggal</th>
+                <th>Usia</th>
+                <th>Jenis Kelamin</th>
+                <th>Kolesterol</th>
+                <th>Detak Jantung Maks.</th>
+                <th>Hasil Prediksi</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for item in histories %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+
+                <td>{{ item.prediction_date|date:"d-m-Y H:i" }}</td>
+
+                <td>{{ item.age }} tahun</td>
+
+                <td>
+                    {% if item.sex == "M" %}
+                        Laki-laki
+                    {% elif item.sex == "F" %}
+                        Perempuan
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+
+                <td>{{ item.cholesterol }}</td>
+
+                <td>{{ item.max_heart_rate }}</td>
+
+                <td>
+                    {% if item.prediction_result == 1 %}
+                        <span class="positive">Terindikasi</span>
+                    {% else %}
+                        <span class="negative">Tidak terindikasi</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% else %}
+
+    <div class="empty">
+        <h3>Belum Ada Riwayat Prediksi</h3>
+        <p>Silakan lakukan prediksi terlebih dahulu.</p>
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
